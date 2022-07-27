@@ -27,6 +27,8 @@ import { CreateBookComponent } from './components/create-book/create-book.compon
 import { BookShopsComponent } from './components/book-shops/book-shops.component';
 import { AuthorsComponent } from './components/authors/authors.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -59,10 +61,13 @@ import { CategoriesComponent } from './components/categories/categories.componen
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
+    MatChipsModule,
+    MatAutocompleteModule,
     RouterModule.forRoot([
       { path: "", component: NavComponent, children: [
         { path: 'login', component: LoginComponent},
-        { path: 'signup', component: SignupComponent }
+        { path: 'signup', component: SignupComponent },
+        { path: 'categories', component: CategoriesComponent }
       ]
     },
     { path: '**', component: NavComponent}

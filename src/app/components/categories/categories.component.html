@@ -1,1 +1,21 @@
-<p>categories works!</p>
+<div class="container">
+    <mat-form-field class="example-chip-list" appearance="outline">
+        <mat-label>Select Categories</mat-label>
+        <mat-chip-list #chipList aria-label="Fruit selection">
+            <mat-chip *ngFor="let category of categories" (removed)="remove(category)">
+                {{category}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+            <input placeholder="New category..." #categoryInput [formControl]="categoryCtrl" [matAutocomplete]="auto"
+                [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let category of filteredCategories | async" [value]="category">
+                {{category}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>
