@@ -22,4 +22,12 @@ export class BookshopService {
   createBookshop(resource: any){
     return this.httpClient.post(this.url + 'Post/', resource, { 'headers': headers }).pipe(map(res => res));
   }
+
+  getById(id: string){
+    return this.httpClient.get(this.url + 'Get/' + id, { 'headers': headers }).pipe(map(res => res));
+  }
+
+  updateBookshop(resource: any){
+    return this.httpClient.put(this.url + 'Put/', resource, { 'headers': headers }).pipe(map(res => res));
+  }
 }

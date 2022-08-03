@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Bookshop } from 'src/app/models/Bookshop';
 import { BookshopService } from 'src/app/services/bookshop/bookshop.service';
@@ -20,7 +21,7 @@ export class CreateBookShopComponent implements OnInit {
 
   pageTitle: string = '';
 
-  constructor(private router: Router, private bookshopService: BookshopService, private route: ActivatedRoute, private _formBuilder: FormBuilder) { }
+  constructor(private _snackBar: MatSnackBar, private router: Router, private bookshopService: BookshopService, private route: ActivatedRoute, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -28,10 +29,18 @@ export class CreateBookShopComponent implements OnInit {
       next: (params) => {
         var id = params.get('id');
         if(id){
-          this.pageTitle = 'Edit Bookshop';
+          this.bookshopService.getById(id)
+            .subscribe({
+              next: (res: any) => {
+                this.bookshop = res;
+              },
+              complete: () => {
+                this.pageTitle = 'Edit '
+              }
+            })
         }
         else{
-          this.pageTitle = 'Create Bookshop';
+          this.pageTitle = 'Create ';
         }
       }
     });
@@ -48,13 +57,25 @@ export class CreateBookShopComponent implements OnInit {
         .subscribe({
           next: (res: any) => {
             // this.userId = <number>res.id;
-
+            this._snackBar.open('Bookshop Added', 'Done', {
+              duration: 3000
+            })
+            
             this.router.navigate(['/bookshops'])
           },
         })
     }
     else{
-      
+      this.bookshopService.updateBookshop(this.bookshop)
+        .subscribe({
+          next: (res: any) => {
+
+            this._snackBar.open('Bookshop Updated', 'Done', {
+              duration: 3000
+            })
+            this.router.navigate(['/bookshops'])
+          }
+        })
     }
   }
 }

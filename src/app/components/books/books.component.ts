@@ -3,13 +3,11 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { forkJoin } from 'rxjs';
-import { Book } from 'src/app/models/Book';
 import { AuthorService } from 'src/app/services/author/author.service';
 import { BookService } from 'src/app/services/book/book.service';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { BookViewComponent } from '../book-view/book-view.component';
-import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { DeleteBookDialogComponent } from '../delete-book-dialog/delete-book-dialog.component';
 
 
 export interface BooksData {
@@ -25,7 +23,7 @@ export interface BooksData {
   styleUrls: ['./books.component.css']
 })
 
-export class BooksComponent implements AfterViewInit {
+export class BooksComponent implements OnInit {
   allBooks: BooksData[] = [];
   displayedColumns: string[] = ['name', 'isbn', 'isActive', 'actions'];
   dataSource?: MatTableDataSource<BooksData> | any;
@@ -54,10 +52,6 @@ export class BooksComponent implements AfterViewInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
-  }
-
-  ngAfterViewInit() {
-
   }
 
   applyFilter(event: Event) {
@@ -121,7 +115,7 @@ export class BooksComponent implements AfterViewInit {
           const dialogConfig = new MatDialogConfig();
           dialogConfig.data = book;
 
-          let dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
+          let dialogRef = this.dialog.open(DeleteBookDialogComponent, dialogConfig);
 
           dialogRef.afterClosed().subscribe((result) =>{
             if(result.event == 'Yes'){

@@ -1,0 +1,11 @@
+    
+    
+<h2 mat-dialog-title>{{ bookshop.name }}</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography width">
+  <h2>Address</h2>
+  <p>{{ bookshop.address }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button color="primary" mat-raised-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
+</mat-dialog-actions>

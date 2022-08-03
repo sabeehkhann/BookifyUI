@@ -1,5 +1,5 @@
 <form #addbookform="ngForm" (submit)="AddBook()">
-<h2>{{ pageTitle }}</h2>
+<h2>{{ pageTitle }} Book</h2>
   <mat-form-field class="my-width" appearance="outline">
     <mat-label>Name</mat-label>
     <input #name="ngModel" name="name" matInput placeholder="Ex. Harry Potter" [(ngModel)]="book.name" required>
@@ -25,8 +25,6 @@
     <mat-label>Category</mat-label>
     <mat-select #category="ngModel" name="category" [(ngModel)]="book.category" multiple required>
       <mat-option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</mat-option>
-      <!-- <mat-option [value]=1>First option</mat-option>
-      <mat-option [value]=2>Second option</mat-option> -->
     </mat-select>
     <mat-error *ngIf="category.invalid">Required</mat-error>
   </mat-form-field>
@@ -42,5 +40,5 @@
   </mat-form-field>
   <br>
   <button class="btn-space" [routerLink]="['/books']" mat-button>Cancel</button>
-  <button [disabled]="addbookform.invalid" type="submit" mat-raised-button color="primary">Create</button>
+  <button [disabled]="addbookform.invalid" type="submit" mat-raised-button color="primary">{{ pageTitle }}</button>
 </form>

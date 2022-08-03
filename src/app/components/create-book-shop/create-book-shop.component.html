@@ -1,5 +1,5 @@
 <form #addbookshopform="ngForm" (submit)="AddBookshop()">
-    <h2>{{ pageTitle }}</h2>
+    <h2>{{ pageTitle }} Bookshop</h2>
     <mat-form-field class="my-width" appearance="outline">
         <mat-label>Name</mat-label>
         <input matInput placeholder="Student Bookshop" #name="ngModel" name="name" [(ngModel)]="bookshop.name" required>
@@ -13,5 +13,5 @@
     </mat-form-field>
     <br>
     <button class="btn-space" [routerLink]="['/bookshops']" mat-button>Cancel</button>
-    <button [disabled]="addbookshopform.invalid" type="submit" mat-raised-button color="primary">Create</button>
+    <button [disabled]="addbookshopform.invalid" type="submit" mat-raised-button color="primary">{{ pageTitle}}</button>
 </form>

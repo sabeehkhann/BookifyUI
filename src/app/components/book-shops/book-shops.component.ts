@@ -1,12 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
+import { BookshopService } from 'src/app/services/bookshop/bookshop.service';
+import { BookshopViewComponent } from '../bookshop-view/bookshop-view.component';
 
 export interface BookshopsData {
+  id: number;
   name: string;
   address: string;
 }
+
+
+
 
 @Component({
   selector: 'app-book-shops',
@@ -14,32 +21,31 @@ export interface BookshopsData {
   styleUrls: ['./book-shops.component.css']
 })
 export class BookShopsComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'address'];
-  dataSource: MatTableDataSource<BookshopsData>;
+  allBookshops: BookshopsData[] = [];
+  displayedColumns: string[] = ['name', 'address', 'actions'];
+  dataSource: MatTableDataSource<BookshopsData> | any;
 
   @ViewChild(MatPaginator) paginator?: MatPaginator | any;
   @ViewChild(MatSort) sort?: MatSort | any;
 
-  constructor() {
-    let bookshops: BookshopsData[] = [
-      {
-        name: 'test1',
-        address: 'test Address' 
-      },
-      {
-        name: 'test2',
-        address: 'test Address'
-      }
-    ]
-    this.dataSource = new MatTableDataSource(bookshops);
-   }
-
-  ngOnInit(): void {
+  constructor(private dialog: MatDialog, private bookshopService: BookshopService) {
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  ngOnInit(): void {
+    this.bookshopService.getAll()
+      .subscribe((res: any) => {
+        res.forEach((element: any) => {
+          let bookshop: BookshopsData = {
+            id: element.id,
+            name: element.name,
+            address: element.address
+          };
+          this.allBookshops?.push(bookshop);
+        });
+        this.dataSource = new MatTableDataSource(this.allBookshops);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      })
   }
 
   applyFilter(event: Event) {
@@ -50,4 +56,43 @@ export class BookShopsComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  openViewDialog(id: string) {
+    let bookshop: any;
+
+    this.bookshopService.getById(id)
+      .subscribe({
+        next: (res: any) => {
+          bookshop = res;
+        },
+        complete: () => {
+          const dialogConfig = new MatDialogConfig();
+          dialogConfig.data = bookshop;
+
+          this.dialog.open(BookshopViewComponent, dialogConfig);
+        }
+      })
+  }
+
+  // openDeleteDialog(id: any) {
+  //   let book: any;
+  //   this.bookService.getBookById(id)
+  //     .subscribe({
+  //       next: (res: any) => {
+  //         book = res;
+  //       },
+  //       complete: () => {
+  //         const dialogConfig = new MatDialogConfig();
+  //         dialogConfig.data = book;
+
+  //         let dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
+
+  //         dialogRef.afterClosed().subscribe((result) => {
+  //           if (result.event == 'Yes') {
+  //             this.deleteRowData(book.id);
+  //           }
+  //         });
+  //       }
+  //     })
+  // }
 }

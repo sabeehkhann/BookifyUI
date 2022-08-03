@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BookService } from 'src/app/services/book/book.service';
-import { BooksComponent } from '../books/books.component';
 
 export class DialogDataExampleDialog {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
@@ -11,13 +10,13 @@ export class DialogDataExampleDialog {
 
 @Component({
   selector: 'app-delete-dialog',
-  templateUrl: './delete-dialog.component.html',
-  styleUrls: ['./delete-dialog.component.css']
+  templateUrl: './delete-book-dialog.component.html',
+  styleUrls: ['./delete-book-dialog.component.css']
 })
-export class DeleteDialogComponent implements OnInit {
+export class DeleteBookDialogComponent implements OnInit {
 
   book: any;
-  constructor(public dialogRef: MatDialogRef<DeleteDialogComponent>,private router: Router, private _snackBar: MatSnackBar,  private bookService: BookService, @Inject(MAT_DIALOG_DATA) data: any) {
+  constructor(public dialogRef: MatDialogRef<DeleteBookDialogComponent>,private router: Router, private _snackBar: MatSnackBar,  private bookService: BookService, @Inject(MAT_DIALOG_DATA) data: any) {
     this.book = data;
    }
 
@@ -42,5 +41,4 @@ export class DeleteDialogComponent implements OnInit {
       }
     })
   }
-
 }

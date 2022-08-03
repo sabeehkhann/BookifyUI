@@ -1,12 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Book } from 'src/app/models/Book';
 
 export class DialogDataExampleDialog {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 }
-
-
 
 @Component({
   selector: 'app-book-view',

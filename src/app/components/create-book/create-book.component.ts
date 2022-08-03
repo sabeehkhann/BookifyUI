@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { CategoryService } from 'src/app/services/category/category.service';
 import { AuthorService } from 'src/app/services/author/author.service';
 import { BookCategoryService } from 'src/app/services/book-category/book-category.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-book',
@@ -29,7 +30,7 @@ export class CreateBookComponent implements OnInit {
   authors: any;
   userId?: number;
 
-  constructor(private router: Router, private bookService: BookService, private route: ActivatedRoute,private catService: CategoryService, private bookCatService: BookCategoryService, private authorService: AuthorService) { }
+  constructor(private _snackBar: MatSnackBar, private router: Router, private bookService: BookService, private route: ActivatedRoute,private catService: CategoryService, private bookCatService: BookCategoryService, private authorService: AuthorService) { }
 
   ngOnInit(): void {
     this.catService.getAllCategories()
@@ -56,7 +57,7 @@ export class CreateBookComponent implements OnInit {
                 this.book = res;
               },
               complete: () => {
-                this.pageTitle = 'Edit Book'
+                this.pageTitle = 'Edit ';
               }
             })
 
@@ -67,10 +68,9 @@ export class CreateBookComponent implements OnInit {
                 this.book.category?.push(ele.categoryId);
               })
             })
-            console.log(this.book.category)
         }
         else{
-          this.pageTitle = 'Create Book';
+          this.pageTitle = 'Create ';
         }
       }
     });
@@ -87,7 +87,9 @@ export class CreateBookComponent implements OnInit {
         .subscribe({
           next: (res: any) => {
             // this.userId = <number>res.id;
-
+            this._snackBar.open('Book Added', 'Done', {
+              duration: 3000
+            })
             this.router.navigate(['/books'])
           },
         })
@@ -96,6 +98,10 @@ export class CreateBookComponent implements OnInit {
       this.bookService.updateBook(this.book)
         .subscribe({
           next: (res: any) => {
+
+            this._snackBar.open('Book Updated', 'Done', {
+              duration: 3000
+            })
             this.router.navigate(['/books'])
           }
         })

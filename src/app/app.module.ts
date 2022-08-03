@@ -45,8 +45,9 @@ import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { BookViewComponent } from './components/book-view/book-view.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { NgxHttpLoaderModule } from 'ngx-http-loader';
-import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import {MatDividerModule} from '@angular/material/divider';
+import { BookshopViewComponent } from './components/bookshop-view/bookshop-view.component';
+import { DeleteBookDialogComponent } from './components/delete-book-dialog/delete-book-dialog.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import {MatDividerModule} from '@angular/material/divider';
     ThankyouPageComponent,
     WelcomePageComponent,
     BookViewComponent,
-    DeleteDialogComponent,
+    BookshopViewComponent,
+    DeleteBookDialogComponent,
   ],
   imports: [
     BrowserModule,
