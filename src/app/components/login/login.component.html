@@ -1,18 +1,23 @@
 <span style="padding-top: 100px;"></span>
 <div class="container">
     <div class="center">
-        <form>
+        <form [formGroup]="formGroup">
+            <mat-error *ngIf="inValid">Inavlid Email or Password</mat-error>
+            <br>
             <mat-form-field class="width" appearance="outline">
                 <mat-label>Email</mat-label>
-                <input matInput>
+                <input matInput formControlName="email" required placeholder="mike@gmail.com">
+                <mat-error *ngIf="formGroup.controls.email.errors?.['required']">Required</mat-error>
+                <mat-error *ngIf="formGroup.controls.email.errors?.['email']">Invalid Email</mat-error>
             </mat-form-field>
             <br>
             <mat-form-field class="width" appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput>
+                <input matInput formControlName="password" required placeholder="xxx">
+                <mat-error *ngIf="formGroup.controls.password.errors?.['required']">Required</mat-error>
             </mat-form-field>
             <br>
-            <button mat-raised-button color="primary">Login</button>
+            <button [disabled]="formGroup.invalid" (click)="Submit()" type="submit" mat-raised-button color="primary">Login</button>
         </form>
     </div>
 </div>

@@ -1,0 +1,16 @@
+<form [formGroup]="formGroup">
+    <h2>Create Bookshop</h2>
+    <mat-form-field class="my-width" appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Student Bookshop" formControlName="name" required>
+        <mat-error *ngIf="formGroup.controls.name.errors?.['required']">Required</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="my-width" appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Shop no. 3, Gulberg, Lahore" formControlName="address" required>
+        <mat-error *ngIf="formGroup.controls.address.errors?.['required']">Required</mat-error>
+    </mat-form-field>
+    <br>
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+</form>

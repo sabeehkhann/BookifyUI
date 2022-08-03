@@ -33,10 +33,9 @@ export class CategoriesComponent implements OnInit {
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
-    console.log(value);
-    console.log(this.categories.includes);
+
     // Add our fruit
-    if (value && !this.categories.includes(value)) {
+    if (value) {
       this.categories.push(value);
     }
 
@@ -46,8 +45,8 @@ export class CategoriesComponent implements OnInit {
     this.categoryCtrl.setValue(null);
   }
 
-  remove(fruit: string): void {
-    const index = this.categories.indexOf(fruit);
+  remove(category: string): void {
+    const index = this.categories.indexOf(category);
 
     if (index >= 0) {
       this.categories.splice(index, 1);

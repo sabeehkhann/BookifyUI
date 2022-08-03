@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>{{ book.name }}</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography width">
+  <h2></h2>
+  <p><b>ISBN: </b>{{ book.isbn }}</p>
+
+  <h2>Author Name</h2>
+  <p>{{ book.authorName }}</p>
+
+  <h2>Description</h2>
+  <p>{{ book.description }}</p>
+  
+  <h2>Category</h2>
+  <p *ngFor="let c of book.categories">{{ c }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button color="primary" mat-raised-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
+</mat-dialog-actions>

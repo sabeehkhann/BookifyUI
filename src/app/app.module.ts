@@ -29,6 +29,25 @@ import { AuthorsComponent } from './components/authors/authors.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { CreateBookShopComponent } from './components/create-book-shop/create-book-shop.component';
+import { CreateAuthorComponent } from './components/create-author/create-author.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { HttpClientModule } from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ThankyouPageComponent } from './components/thankyou-page/thankyou-page.component';
+import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+import { AuthGuardService } from './services/auth-guard/auth-guard.service';
+import { BookViewComponent } from './components/book-view/book-view.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { NgxHttpLoaderModule } from 'ngx-http-loader';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +60,12 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     BookShopsComponent,
     AuthorsComponent,
     CategoriesComponent,
+    CreateBookShopComponent,
+    CreateAuthorComponent,
+    ThankyouPageComponent,
+    WelcomePageComponent,
+    BookViewComponent,
+    DeleteDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,11 +88,32 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatCardModule,
     MatChipsModule,
     MatAutocompleteModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    MatMenuModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatDividerModule,
+    NgxHttpLoaderModule.forRoot(),
     RouterModule.forRoot([
       { path: "", component: NavComponent, children: [
         { path: 'login', component: LoginComponent},
         { path: 'signup', component: SignupComponent },
-        { path: 'categories', component: CategoriesComponent }
+        { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuardService]},
+        { path: 'books', component: BooksComponent, canActivate: [AuthGuardService]},
+        { path: 'createbook', component: CreateBookComponent, canActivate: [AuthGuardService]},
+        { path: 'createbook/:id', component: CreateBookComponent, canActivate: [AuthGuardService]},
+        { path: 'createbookshop', component: CreateBookShopComponent, canActivate: [AuthGuardService]},
+        { path: 'bookshops', component: BookShopsComponent, canActivate: [AuthGuardService]},
+        { path: 'authors', component: AuthorsComponent, canActivate: [AuthGuardService]},
+        { path: 'createauthor', component: CreateAuthorComponent, canActivate: [AuthGuardService]},
+        { path: 'bookview', component: BookViewComponent, canActivate: [AuthGuardService]},
+        { path: 'thankyou', component: ThankyouPageComponent,},
+        { path: 'welcome', component: WelcomePageComponent},
       ]
     },
     { path: '**', component: NavComponent}

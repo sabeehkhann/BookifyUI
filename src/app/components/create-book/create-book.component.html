@@ -1,1 +1,46 @@
-<p>create-book works!</p>
+<form #addbookform="ngForm" (submit)="AddBook()">
+<h2>{{ pageTitle }}</h2>
+  <mat-form-field class="my-width" appearance="outline">
+    <mat-label>Name</mat-label>
+    <input #name="ngModel" name="name" matInput placeholder="Ex. Harry Potter" [(ngModel)]="book.name" required>
+    <mat-error *ngIf="name.invalid">Required</mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="my-width" appearance="outline">
+    <mat-label>Author</mat-label>
+    <mat-select #authorId="ngModel" name="authorId" [(ngModel)]="book.authorId" required>
+      <mat-option [value]="0">Select</mat-option>
+      <mat-option *ngFor="let author of authors" [value]="author.id" [value]="author.id">{{ author.name }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="authorId.invalid">Required</mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="my-width" appearance="outline">
+    <mat-label>ISBN</mat-label>
+    <input #isbn="ngModel" name="isbn" type="text" matInput placeholder="" [(ngModel)]="book.isbn" required>
+    <mat-error *ngIf="isbn.invalid">Required</mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="my-width" appearance="outline">
+    <mat-label>Category</mat-label>
+    <mat-select #category="ngModel" name="category" [(ngModel)]="book.category" multiple required>
+      <mat-option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</mat-option>
+      <!-- <mat-option [value]=1>First option</mat-option>
+      <mat-option [value]=2>Second option</mat-option> -->
+    </mat-select>
+    <mat-error *ngIf="category.invalid">Required</mat-error>
+  </mat-form-field>
+  <br>
+  <section class="my-width">
+    <mat-checkbox name="isActive" color="primary" [(ngModel)]="book.isActive" class="example-margin">Active</mat-checkbox>
+  </section>
+  <br>
+  <mat-form-field class="my-width" appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea #desc="ngModel" name="description" placeholder="Short description" matInput [(ngModel)]="book.description" required></textarea>
+    <mat-error *ngIf="desc.invalid">Required</mat-error>
+  </mat-form-field>
+  <br>
+  <button class="btn-space" [routerLink]="['/books']" mat-button>Cancel</button>
+  <button [disabled]="addbookform.invalid" type="submit" mat-raised-button color="primary">Create</button>
+</form>

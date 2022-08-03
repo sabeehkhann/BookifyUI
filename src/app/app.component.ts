@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgxLoader } from 'ngx-http-loader';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public loader = NgxLoader;
   title = 'bookifyUI';
 }

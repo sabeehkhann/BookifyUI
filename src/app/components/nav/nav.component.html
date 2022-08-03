@@ -3,12 +3,12 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar *ngIf="service?.isLoggedIn() == true">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Books</a>
-      <a mat-list-item href="#">Bookshops</a>
-      <a mat-list-item href="#">Authors</a>
-      <a routerLink="/categories" mat-list-item href="#">Categories</a>
+      <a *ngIf="service?.isLoggedIn() == true" routerLink="/books" mat-list-item href="#">Books</a>
+      <a *ngIf="service?.isLoggedIn() == true" routerLink="/bookshops" mat-list-item href="#">Bookshops</a>
+      <a *ngIf="service?.isLoggedIn() == true" routerLink="/authors" mat-list-item href="#">Authors</a>
+      <a *ngIf="service?.isLoggedIn() == true" routerLink="/categories" mat-list-item href="#">Categories</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,8 +22,9 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span class="fill-span">Bookify</span>
-      <a routerLink="/login" class="button-padding" mat-button href="#">Login</a>
-      <a routerLink="/signup" mat-button href="#">Sign up</a>
+      <a *ngIf="service?.isLoggedIn() == false" routerLink="/login" class="button-padding" mat-button href="#">Login</a>
+      <a *ngIf="service?.isLoggedIn() == true" routerLink="/login" (click)="service?.logout()" class="button-padding" mat-button href="#">Logout</a>
+      <a *ngIf="service?.isLoggedIn() == false" routerLink="/signup" mat-button href="#">Sign up</a>
     </mat-toolbar>
     <router-outlet></router-outlet>
     <!-- Add Content Here -->

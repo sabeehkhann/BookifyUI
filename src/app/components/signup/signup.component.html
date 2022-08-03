@@ -3,108 +3,191 @@
         <mat-step [stepControl]="firstFormGroup">
             <form [formGroup]="firstFormGroup">
                 <ng-template matStepLabel>User Info</ng-template>
-                <mat-form-field appearance="outline">
+                <mat-form-field class="my-width" appearance="outline">
                     <mat-label>First Name</mat-label>
                     <input matInput placeholder="First name" formControlName="firstName" required>
+                    <mat-error *ngIf="firstFormGroup.controls.firstName.errors?.['required']">Required</mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field appearance="outline">
+                <mat-form-field class="my-width" appearance="outline">
                     <mat-label>Last Name</mat-label>
-                    <input matInput placeholder="Last name" formControlName="lastName" required>
+                    <input class="my-width" matInput placeholder="Last name" formControlName="lastName" required>
+                    <mat-error *ngIf="firstFormGroup.controls.lastName.errors?.['required']">Required</mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field appearance="outline">
+                <mat-form-field class="my-width" appearance="outline">
                     <mat-label>Age</mat-label>
-                    <input matInput placeholder="Age" formControlName="age">
+                    <input type="number" matInput placeholder="Age" formControlName="age">
+                    <mat-error *ngIf="firstFormGroup.controls.age.errors?.['min']">Age must be greater than 18
+                    </mat-error>
+                    <mat-error *ngIf="firstFormGroup.controls.age.errors?.['max']">Age must be less than 100</mat-error>
+
                 </mat-form-field>
                 <br>
-                <mat-form-field appearance="outline">
+                <mat-form-field class="my-width" appearance="outline">
                     <mat-label>Email</mat-label>
                     <input type="email" matInput placeholder="Email" formControlName="email" required>
+                    <mat-error *ngIf="firstFormGroup.controls.email.errors?.['required']">Required</mat-error>
+                    <mat-error *ngIf="firstFormGroup.controls.email.errors?.['email']">Invalid Email</mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field appearance="outline">
+                <mat-form-field class="my-width" appearance="outline">
                     <mat-label>Password</mat-label>
                     <input type="password" matInput placeholder="Password" formControlName="password" required>
+                    <mat-error *ngIf="firstFormGroup.controls.password.errors?.['required']">Required</mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field appearance="outline">
+                <mat-form-field class="my-width" appearance="outline">
                     <mat-label>Confirm Password</mat-label>
-                    <input type="password" matInput placeholder="Confirm Password" formControlName="confirmPassword"
+                    <input compare="password" type="password" matInput placeholder="Confirm Password" formControlName="confirmPassword"
                         required>
+                    <mat-error *ngIf="firstFormGroup.controls.confirmPassword.errors?.['required']">Required</mat-error>
                 </mat-form-field>
                 <div>
-                    <button mat-button matStepperNext>Next</button>
+                    <button color="primary" mat-raised-button matStepperNext>Next</button>
                 </div>
             </form>
         </mat-step>
         <mat-step [stepControl]="secondFormGroup" label="Address Info">
             <form [formGroup]="secondFormGroup">
-                <mat-form-field appearance="outline">
-                    <mat-label>Address</mat-label>
-                    <input matInput formControlName="address" placeholder="Ex. 1 Main St, New York, NY" required>
+                <mat-form-field class="my-width" appearance="outline">
+                    <mat-label>Address Line 1</mat-label>
+                    <input matInput formControlName="addressLine1" placeholder="Ex. 1 Main St, New York, NY" required>
+                    <mat-error *ngIf="secondFormGroup.controls.addressLine1.errors?.['required']">Required</mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field appearance="outline">
+                <mat-form-field class="my-width" appearance="outline">
+                    <mat-label>Address Line 2</mat-label>
+                    <input matInput formControlName="addressLine2" placeholder="Ex. 1 Main St, New York, NY">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="my-width" appearance="outline">
                     <mat-label>City</mat-label>
                     <mat-select formControlName="city" required>
                         <mat-option value="">Select</mat-option>
-                        <mat-option value="1">Pakistan</mat-option>
-                        <mat-option value="2">India</mat-option>
+                        <mat-option value="Lahore">Lahore</mat-option>
+                        <mat-option value="Karachi">Karachi</mat-option>
+                        <mat-option value="Peshawar">Peshawar</mat-option>
                     </mat-select>
+                    <mat-error *ngIf="secondFormGroup.controls.city.errors?.['required']">Required</mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field appearance="outline">
+                <mat-form-field class="my-width" appearance="outline">
                     <mat-label>State/Province</mat-label>
                     <mat-select formControlName="state" required>
                         <mat-option value="">Select</mat-option>
-                        <mat-option value="1">Punjab</mat-option>
-                        <mat-option value="2">KPK</mat-option>
+                        <mat-option value="Punjab">Punjab</mat-option>
+                        <mat-option value="KPK">KPK</mat-option>
+                        <mat-option value="Balochistan">Balochistan</mat-option>
+                        <mat-option value="Sindh">Sindh</mat-option>
                     </mat-select>
+                    <mat-error *ngIf="secondFormGroup.controls.state.errors?.['required']">Required</mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field appearance="outline">
+                <mat-form-field class="my-width" appearance="outline">
                     <mat-label>ZIP/Postal Code</mat-label>
                     <input matInput formControlName="zipCode" placeholder="xxxxx" required>
+                    <mat-error *ngIf="secondFormGroup.controls.zipCode.errors?.['required']">Required</mat-error>
                 </mat-form-field>
                 <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
+                    <button class="my-btn" mat-raised-button matStepperPrevious>Back</button>
+                    <button color="primary" mat-raised-button matStepperNext>Next</button>
                 </div>
             </form>
         </mat-step>
         <mat-step [stepControl]="thirdFormGroup" label="Credit Card Info">
             <form [formGroup]="thirdFormGroup">
-                <mat-form-field appearance="outline">
+                <mat-form-field class="my-width" appearance="outline">
                     <mat-label>Owner</mat-label>
                     <input matInput formControlName="owner" placeholder="Mike" required>
+                    <mat-error *ngIf="thirdFormGroup.controls.owner.errors?.['required']">Required</mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field appearance="outline">
+                <mat-form-field class="my-width" appearance="outline">
                     <mat-label>Card Number</mat-label>
-                    <input type="number" matInput formControlName="cardNum" placeholder="" required>
+                    <input type="number" matInput formControlName="cardNumber" placeholder="" required>
+                    <mat-error *ngIf="thirdFormGroup.controls.cardNumber.errors?.['required']">Required</mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field appearance="outline">
-                    <mat-label>Expiry Date</mat-label>
-                    <input formControlName="expiryDate" matInput [matDatepicker]="picker">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                <mat-form-field class="my-width" appearance="outline">
+                    <mat-label>CVV</mat-label>
+                    <input type="number" matInput formControlName="cvv" placeholder="xxx" required>
+                    <mat-error *ngIf="thirdFormGroup.controls.cvv.errors?.['required']">Required</mat-error>
+                    <mat-error *ngIf="thirdFormGroup.controls.cvv.errors?.['max']">Maximum 3 digit</mat-error>
+                    <mat-error *ngIf="thirdFormGroup.controls.cvv.errors?.['min']">Mininum 3 digit</mat-error>
                 </mat-form-field>
+                <br>
+                <mat-form-field class="my-width" appearance="outline">
+                    <mat-label>Expiry Date</mat-label>
+                    <input formControlName="expiryDate" matInput [matDatepicker]="dp" [formControl]="thirdFormGroup.controls.expiryDate">
+                    <mat-hint>MM/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                    <mat-datepicker #dp
+                                    startView="multi-year"
+                                    (monthSelected)="setMonthAndYear($event, dp)"
+                                    panelClass="example-month-picker">
+                    </mat-datepicker>
+                    <mat-error *ngIf="thirdFormGroup.controls.expiryDate.errors?.['required']">Required</mat-error>
+                  </mat-form-field>
                 <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
+                    <button class="my-btn" mat-raised-button matStepperPrevious>Back</button>
+                    <button color="primary" mat-raised-button matStepperNext>Next</button>
                 </div>
             </form>
         </mat-step>
         <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
-            <p>You are now done.</p>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
+            <ng-template matStepLabel>Review</ng-template>
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <b>User Information</b>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Summary of user information
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p><b>First Name: </b>{{ firstFormGroup.controls.firstName.value }} </p>
+                    <p><b>Last Name: </b>{{ firstFormGroup.controls.lastName.value }} </p>
+                    <p *ngIf="firstFormGroup.controls.age.value"><b>Age: </b>{{ firstFormGroup.controls.age.value }} </p>
+                    <p><b>Email: </b>{{ firstFormGroup.controls.email.value }} </p>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <b>Address Information</b>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Summary of address information
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p><b>Address Line 1: </b>{{ secondFormGroup.controls.addressLine1.value }} </p>
+                    <p *ngIf="secondFormGroup.controls.addressLine2.value"><b>Address Line 2: </b>{{ secondFormGroup.controls.addressLine2.value }} </p>
+                    <p><b>City: </b>{{ secondFormGroup.controls.city.value }} </p>
+                    <p><b>State/Province: </b>{{ secondFormGroup.controls.state.value }} </p>
+                    <p><b>ZipCode: </b>{{ secondFormGroup.controls.zipCode.value }} </p>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <b>Credit Card Information</b>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Summary of credit card information
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p><b>Owner: </b>{{ thirdFormGroup.controls.owner.value }} </p>
+                    <p><b>Card No.: </b>{{ thirdFormGroup.controls.cardNumber.value }} </p>
+                    <p><b>CVV: </b>{{ thirdFormGroup.controls.cvv.value }} </p>
+                    <p><b>Expiry: </b>{{ thirdFormGroup.controls.expiryDate.value?.format('MM-YYYY') }} </p>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <div style="padding-top: 30px;">
+                <button mat-raised-button matStepperPrevious class="my-btn">Back</button>
+                <button mat-raised-button color="warn" (click)="stepper.reset()" class="my-btn">Reset</button>
+                <button (click)="submitForm()" type="submit" mat-raised-button color="primary">Submit</button>
             </div>
         </mat-step>
     </mat-stepper>
+
 <!-- </div> -->

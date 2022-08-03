@@ -5,3 +5,19 @@
   .mat-form-field {
     margin-top: 16px;
   }
+
+  .my-btn{
+    margin-right: 10px;
+  }
+
+  .my-width{
+    width: 500px;
+  }
+
+  mat-progress-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
