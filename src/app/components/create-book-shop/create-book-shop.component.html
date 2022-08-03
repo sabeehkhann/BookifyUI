@@ -1,16 +1,17 @@
-<form [formGroup]="formGroup">
-    <h2>Create Bookshop</h2>
+<form #addbookshopform="ngForm" (submit)="AddBookshop()">
+    <h2>{{ pageTitle }}</h2>
     <mat-form-field class="my-width" appearance="outline">
         <mat-label>Name</mat-label>
-        <input matInput placeholder="Student Bookshop" formControlName="name" required>
-        <mat-error *ngIf="formGroup.controls.name.errors?.['required']">Required</mat-error>
+        <input matInput placeholder="Student Bookshop" #name="ngModel" name="name" [(ngModel)]="bookshop.name" required>
+        <mat-error *ngIf="name.invalid">Required</mat-error>
     </mat-form-field>
     <br>
     <mat-form-field class="my-width" appearance="outline">
         <mat-label>Address</mat-label>
-        <input matInput placeholder="Shop no. 3, Gulberg, Lahore" formControlName="address" required>
-        <mat-error *ngIf="formGroup.controls.address.errors?.['required']">Required</mat-error>
+        <input matInput placeholder="Shop no. 3, Gulberg, Lahore" #address="ngModel" name="address" [(ngModel)]="bookshop.address" required>
+        <mat-error *ngIf="address.invalid">Required</mat-error>
     </mat-form-field>
     <br>
-    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button class="btn-space" [routerLink]="['/bookshops']" mat-button>Cancel</button>
+    <button [disabled]="addbookshopform.invalid" type="submit" mat-raised-button color="primary">Create</button>
 </form>

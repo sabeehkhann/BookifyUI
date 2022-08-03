@@ -108,6 +108,7 @@ import {MatDividerModule} from '@angular/material/divider';
         { path: 'createbook', component: CreateBookComponent, canActivate: [AuthGuardService]},
         { path: 'createbook/:id', component: CreateBookComponent, canActivate: [AuthGuardService]},
         { path: 'createbookshop', component: CreateBookShopComponent, canActivate: [AuthGuardService]},
+        { path: 'createbookshop/:id', component: CreateBookShopComponent, canActivate: [AuthGuardService]},
         { path: 'bookshops', component: BookShopsComponent, canActivate: [AuthGuardService]},
         { path: 'authors', component: AuthorsComponent, canActivate: [AuthGuardService]},
         { path: 'createauthor', component: CreateAuthorComponent, canActivate: [AuthGuardService]},

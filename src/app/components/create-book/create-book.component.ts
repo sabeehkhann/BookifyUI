@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, NumberValueAccessor, Validators } from '@angular/forms';
 import { BookService } from 'src/app/services/book/book.service';
 import { Book } from 'src/app/models/Book';
-import { ActivatedRoute, Route, Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { CategoryService } from 'src/app/services/category/category.service';
 import { AuthorService } from 'src/app/services/author/author.service';
-import { User } from 'src/app/models/User';
-import { Category } from 'src/app/models/Category';
 import { BookCategoryService } from 'src/app/services/book-category/book-category.service';
-import { mergeMap, switchMap } from 'rxjs';
-import { E } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-create-book',
@@ -96,8 +91,6 @@ export class CreateBookComponent implements OnInit {
             this.router.navigate(['/books'])
           },
         })
-
-        
     }
     else {
       this.bookService.updateBook(this.book)
