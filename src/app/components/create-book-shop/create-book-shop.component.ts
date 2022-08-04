@@ -57,9 +57,7 @@ export class CreateBookShopComponent implements OnInit {
         .subscribe({
           next: (res: any) => {
             // this.userId = <number>res.id;
-            this._snackBar.open('Bookshop Added', 'Done', {
-              duration: 3000
-            })
+            
             
             this.router.navigate(['/bookshops'])
           },

@@ -4,7 +4,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookshopService } from 'src/app/services/bookshop/bookshop.service';
+import { AddStockDialogComponent } from '../add-stock-dialog/add-stock-dialog.component';
 import { BookshopViewComponent } from '../bookshop-view/bookshop-view.component';
+import { DeleteBookshopDialogComponent } from '../delete-bookshop-dialog/delete-bookshop-dialog.component';
 
 export interface BookshopsData {
   id: number;
@@ -74,25 +76,48 @@ export class BookShopsComponent implements OnInit {
       })
   }
 
-  // openDeleteDialog(id: any) {
-  //   let book: any;
-  //   this.bookService.getBookById(id)
-  //     .subscribe({
-  //       next: (res: any) => {
-  //         book = res;
-  //       },
-  //       complete: () => {
-  //         const dialogConfig = new MatDialogConfig();
-  //         dialogConfig.data = book;
+  openDeleteDialog(id: any) {
+    let bookshop: any;
+    this.bookshopService.getById(id)
+      .subscribe({
+        next: (res: any) => {
+          bookshop = res;
+        },
+        complete: () => {
+          const dialogConfig = new MatDialogConfig();
+          dialogConfig.data = bookshop;
 
-  //         let dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
+          let dialogRef = this.dialog.open(DeleteBookshopDialogComponent, dialogConfig);
 
-  //         dialogRef.afterClosed().subscribe((result) => {
-  //           if (result.event == 'Yes') {
-  //             this.deleteRowData(book.id);
-  //           }
-  //         });
-  //       }
-  //     })
-  // }
+          dialogRef.afterClosed().subscribe((result) =>{
+            if(result.event == 'Yes'){
+              this.deleteRowData(bookshop.id);
+            }
+          });
+        }
+      })
+  }
+
+  openAddStockDialog(id: any){
+    let bookshop: any;
+    this.bookshopService.getById(id)
+    .subscribe({
+      next: (res: any) => {
+        bookshop = res;
+      },
+      complete: () => {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.data = bookshop;
+
+        let dialogRef = this.dialog.open(AddStockDialogComponent, dialogConfig);
+      }
+    })
+  }
+
+  deleteRowData(id: any){
+    this.dataSource = this.dataSource.data.filter((value: any) =>{
+      
+      return value.id != id;
+    });
+  }
 }

@@ -48,6 +48,8 @@ import { NgxHttpLoaderModule } from 'ngx-http-loader';
 import {MatDividerModule} from '@angular/material/divider';
 import { BookshopViewComponent } from './components/bookshop-view/bookshop-view.component';
 import { DeleteBookDialogComponent } from './components/delete-book-dialog/delete-book-dialog.component';
+import { DeleteBookshopDialogComponent } from './components/delete-bookshop-dialog/delete-bookshop-dialog.component';
+import { AddStockDialogComponent } from './components/add-stock-dialog/add-stock-dialog.component';
 
 
 @NgModule({
@@ -68,6 +70,8 @@ import { DeleteBookDialogComponent } from './components/delete-book-dialog/delet
     BookViewComponent,
     BookshopViewComponent,
     DeleteBookDialogComponent,
+    DeleteBookshopDialogComponent,
+    AddStockDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,10 @@ export class BookService {
     return this,this.httpClient.get(this.url + 'GetAll').pipe(map(res => res));
   }
 
+  getAllBooksForBookshop(id: string, createdBy: string){
+    return this,this.httpClient.get(this.url + 'GetAllForBookshop/' + id + '/' + createdBy).pipe(map(res => res));
+  }
+
   createBook(resource: any){
     return this.httpClient.post(this.url + 'Post/', resource, { 'headers': headers }).pipe(map(res => res));
   }

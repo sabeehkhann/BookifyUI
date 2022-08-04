@@ -26,9 +26,10 @@
         <button color="primary" [matMenuTriggerFor]="menu" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
           <mat-icon>menu</mat-icon>
           <mat-menu #menu="matMenu">
+            <button (click)="openAddStockDialog(row.id)" mat-menu-item>Update Stock</button>
             <button (click)="openViewDialog(row.id)" mat-menu-item>View</button>
             <button [routerLink]="['/createbookshop', row.id]" mat-menu-item>Edit</button>
-            <button mat-menu-item>Delete</button>
+            <button (click)="openDeleteDialog(row.id)" mat-menu-item>Delete</button>
           </mat-menu>
         </button>
         </td>

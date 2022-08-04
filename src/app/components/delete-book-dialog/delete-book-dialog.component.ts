@@ -36,8 +36,6 @@ export class DeleteBookDialogComponent implements OnInit {
         });
 
         this.dialogRef.close({event:'Yes'});
-        
-        this.router.navigate(['/books']);
       }
     })
   }

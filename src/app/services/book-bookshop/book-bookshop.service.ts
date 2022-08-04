@@ -10,28 +10,31 @@ const headers= new HttpHeaders()
 @Injectable({
   providedIn: 'root'
 })
-export class BookshopService {
-  private url = 'https://localhost:44353/api/Bookshop/'
-
+export class BookBookshopService {
+  private url = 'https://localhost:44353/api/BookBookshop/'
   constructor(private httpClient: HttpClient) { }
 
   getAll(){
     return this,this.httpClient.get(this.url + 'GetAll').pipe(map(res => res));
   }
 
-  createBookshop(resource: any){
+  getAllBookshopDetail(id: string){
+    return this,this.httpClient.get(this.url + 'GetAllBookshopDetails/' + id, { 'headers': headers }).pipe(map(res => res));
+  }
+
+  createBookBookshop(resource: any){
     return this.httpClient.post(this.url + 'Post/', resource, { 'headers': headers }).pipe(map(res => res));
   }
 
-  getById(id: string){
+  getBookBookshopById(id: string){
     return this.httpClient.get(this.url + 'Get/' + id, { 'headers': headers }).pipe(map(res => res));
   }
 
-  updateBookshop(resource: any){
+  updateBookBookshop(resource: any){
     return this.httpClient.put(this.url + 'Put/', resource, { 'headers': headers }).pipe(map(res => res));
   }
 
-  deleteBookshop(id: string){
-    return this.httpClient.delete(this.url + 'Delete/' + id, { 'headers': headers }).pipe(map(res => res))
+  deleteBookBookshop(id: string){
+    return this.httpClient.delete(this.url + 'DeleteByBookId/' + id, { 'headers': headers }).pipe(map(res => res))
   }
 }

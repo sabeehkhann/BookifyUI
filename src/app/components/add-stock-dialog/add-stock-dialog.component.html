@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Update Stock</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content style="padding-top: 10px;" class="mat-typography width">
+  <div *ngFor="let book of bookshopData">
+    <mat-form-field style="padding-right: 10px;" appearance="outline">
+      <!-- <mat-label>Enter some input</mat-label> -->
+      <input matInput [value]="book.book.name" disabled placeholder="" type="text">
+    </mat-form-field>
+    <mat-form-field style="padding-right: 10px;" appearance="outline">
+      <!-- <mat-label>Enter some input</mat-label> -->
+      <input min="0" #stockEdit name="stockEdit" [value]="book.stock" matInput placeholder="Number" type="number" required>
+    </mat-form-field>
+    <button (click)="editStock(book.bookId, stockEdit.value)" color="primary" mat-raised-button>Edit</button>
+  </div>
+  <h2 mat-dialog-title>Add Book</h2>
+  <mat-divider></mat-divider>
+  <form #addBookForm="ngForm" (ngSubmit)="addBook(addBookForm, booklist.value)">
+    <mat-form-field style="padding-right: 10px;" appearance="outline">
+      <mat-label>Select Book</mat-label>
+      <mat-select name="booklist" #booklist="ngModel" [(ngModel)]="selectListValue" placeholder="Select Book" required>
+        <mat-option value="">Select Book</mat-option>
+        <mat-option *ngFor="let b of BooksSelectList" [value]="b.id">{{ b.name }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="booklist.invalid">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field style="padding-top: 10px; padding-right: 10px;" appearance="outline">
+      <!-- <mat-label>Enter some input</mat-label> -->
+      <input min="0" matInput name="stock" #stock="ngModel" [(ngModel)]="stockValue" id="stock" placeholder="Number" type="number" required>
+      <mat-error *ngIf="stock.invalid">Required</mat-error>
+    </mat-form-field>
+    <button [disabled]="stock.invalid || booklist.invalid" color="primary"
+      mat-raised-button type="submit">Add</button>
+  </form>
+  
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+  <button color="primary" mat-raised-button [mat-dialog-close]="true" cdkFocusInitial>Okay</button>
+</mat-dialog-actions>
