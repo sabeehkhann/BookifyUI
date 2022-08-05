@@ -1,5 +1,4 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ArrayType } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 

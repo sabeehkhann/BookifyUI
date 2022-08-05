@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { BookService } from 'src/app/services/book/book.service';
 import { BookshopService } from 'src/app/services/bookshop/bookshop.service';
 
 export class DialogDataExampleDialog {

@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { forkJoin } from 'rxjs';
-import { Author } from 'src/app/models/Author';
 import { AuthorService } from 'src/app/services/author/author.service';
 import { BookService } from 'src/app/services/book/book.service';
 import { AuthorViewComponent } from '../author-view/author-view.component';
