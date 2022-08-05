@@ -15,8 +15,8 @@ export class BookshopService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAll(){
-    return this,this.httpClient.get(this.url + 'GetAll').pipe(map(res => res));
+  getAll(id: string){
+    return this,this.httpClient.get(this.url + 'GetAllForUser/' + id).pipe(map(res => res));
   }
 
   createBookshop(resource: any){

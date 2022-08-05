@@ -14,8 +14,8 @@ export class AuthorService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAll(){
-    return this.httpClient.get(this.url + 'GetAll').pipe(map(res=> res));
+  getAll(id: string){
+    return this.httpClient.get(this.url + 'GetAllForUser/' + id).pipe(map(res=> res));
   }
 
   getById(id: string){

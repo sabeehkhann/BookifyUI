@@ -37,6 +37,7 @@ export class AddStockDialogComponent implements OnInit {
       .subscribe(({ requestOne, requestTwo }) => {
         this.BooksSelectList = requestOne;
         this.bookshopData = requestTwo;
+        console.log(this.bookshopData);
       });
   }
 

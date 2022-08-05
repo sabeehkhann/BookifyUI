@@ -35,10 +35,11 @@ export class CreateBookComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar, private router: Router, private bookService: BookService, private route: ActivatedRoute,private catService: CategoryService, private bookCatService: BookCategoryService, private authorService: AuthorService) { }
 
   ngOnInit(): void {
+    let user: any = JSON.parse(localStorage.getItem('User')!);
 
     forkJoin({
       requestOne: this.catService.getAllCategories(),
-      requestTwo: this.authorService.getAll(),
+      requestTwo: this.authorService.getAll(user.id),
     })
       .subscribe(({ requestOne, requestTwo }) => {
         this.categories = requestOne;

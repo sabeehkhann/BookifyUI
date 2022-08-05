@@ -36,7 +36,8 @@ export class BooksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.bookService.getAll()
+    let user: any = JSON.parse(localStorage.getItem('User')!);
+    this.bookService.getAllForUser(user.id)
       .subscribe((res: any) => {
         res.forEach((element: any) => {
           let book: BooksData = {

@@ -3,8 +3,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { forkJoin } from 'rxjs';
 import { Author } from 'src/app/models/Author';
 import { AuthorService } from 'src/app/services/author/author.service';
+import { BookService } from 'src/app/services/book/book.service';
 import { AuthorViewComponent } from '../author-view/author-view.component';
 import { DeleteAuthorDialogComponent } from '../delete-author-dialog/delete-author-dialog.component';
 
@@ -26,11 +28,12 @@ export class AuthorsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator?: MatPaginator | any;
   @ViewChild(MatSort) sort?: MatSort | any;
 
-  constructor(private dialog: MatDialog, private authorService: AuthorService) {
+  constructor(private bookService: BookService, private dialog: MatDialog, private authorService: AuthorService) {
 
   }
   ngOnInit(): void {
-    this.authorService.getAll()
+    let user: any = JSON.parse(localStorage.getItem('User')!);
+    this.authorService.getAll(user.id)
       .subscribe((res: any) => {
         res.forEach((element: any) => {
           let author: AuthorsData = {
@@ -56,19 +59,34 @@ export class AuthorsComponent implements OnInit {
 
   openViewDialog(id: string) {
     let author: any;
+    let books: any;
+    forkJoin({
+      authorRes: this.authorService.getById(id),
+      booksRes: this.bookService.getAllBooksForAuthor(id)
+    })
+    .subscribe(({ authorRes, booksRes }) => {
+      author = authorRes;
+      books = booksRes;
+      
+      author.books = books
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.data = author;
 
-    this.authorService.getById(id)
-      .subscribe({
-        next: (res: any) => {
-          author = res;
-        },
-        complete: () => {
-          const dialogConfig = new MatDialogConfig();
-          dialogConfig.data = author;
+      this.dialog.open(AuthorViewComponent, dialogConfig);
+    });
 
-          this.dialog.open(AuthorViewComponent, dialogConfig);
-        }
-      })
+    // this.authorService.getById(id)
+    //   .subscribe({
+    //     next: (res: any) => {
+    //       author = res;
+    //     },
+    //     complete: () => {
+    //       const dialogConfig = new MatDialogConfig();
+    //       dialogConfig.data = author;
+
+    //       this.dialog.open(AuthorViewComponent, dialogConfig);
+    //     }
+    //   })
   }
 
   openDeleteDialog(id: string){

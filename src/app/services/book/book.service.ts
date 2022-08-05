@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ArrayType } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 
@@ -14,12 +15,16 @@ export class BookService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAll(){
-    return this,this.httpClient.get(this.url + 'GetAll').pipe(map(res => res));
+  getAllForUser(id: string){
+    return this,this.httpClient.get(this.url + 'GetAllForUser/'+ id).pipe(map(res => res));
   }
 
   getAllBooksForBookshop(id: string, createdBy: string){
     return this,this.httpClient.get(this.url + 'GetAllForBookshop/' + id + '/' + createdBy).pipe(map(res => res));
+  }
+
+  getAllBooksForAuthor(id: string){
+    return this,this.httpClient.get(this.url + 'GetAllForAuthor/' + id ).pipe(map(res => res));
   }
 
   createBook(resource: any){

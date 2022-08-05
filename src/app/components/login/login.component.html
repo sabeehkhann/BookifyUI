@@ -2,6 +2,8 @@
 <div class="container">
     <div class="center">
         <form [formGroup]="formGroup">
+            <h2>Login</h2>
+            <mat-divider></mat-divider>
             <mat-error *ngIf="inValid">Inavlid Email or Password</mat-error>
             <br>
             <mat-form-field class="width" appearance="outline">
@@ -13,7 +15,7 @@
             <br>
             <mat-form-field class="width" appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput formControlName="password" required placeholder="xxx">
+                <input matInput formControlName="password" required placeholder="" type="password">
                 <mat-error *ngIf="formGroup.controls.password.errors?.['required']">Required</mat-error>
             </mat-form-field>
             <br>

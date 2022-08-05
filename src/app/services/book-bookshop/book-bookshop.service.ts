@@ -14,8 +14,8 @@ export class BookBookshopService {
   private url = 'https://localhost:44353/api/BookBookshop/'
   constructor(private httpClient: HttpClient) { }
 
-  getAll(){
-    return this,this.httpClient.get(this.url + 'GetAll').pipe(map(res => res));
+  getAll(id: string){
+    return this,this.httpClient.get(this.url + 'GetAllForUser/' + id).pipe(map(res => res));
   }
 
   getAllBookshopDetail(id: string){
