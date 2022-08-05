@@ -77,8 +77,7 @@ export class AuthorsComponent implements OnInit {
       .subscribe({
         next: (res: any) => {
           author = res;
-        },
-        complete: () => {
+
           const dialogConfig = new MatDialogConfig();
           dialogConfig.data = author;
 
@@ -86,17 +85,19 @@ export class AuthorsComponent implements OnInit {
 
           dialogRef.afterClosed().subscribe((result) =>{
             if(result.event == 'Yes'){
-              console.log(author.id);
               this.deleteRowData(author.id);
             }
           });
+        },
+        complete: () => {
+          
         }
       })
   }
 
   deleteRowData(id: any){
     this.dataSource = this.dataSource.data.filter((value: any) =>{
-      
+      console.log(id, value.id);
       return value.id != id;
     });
   }

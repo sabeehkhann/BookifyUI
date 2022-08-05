@@ -3,40 +3,34 @@
         <mat-step [stepControl]="firstFormGroup">
             <form [formGroup]="firstFormGroup">
                 <ng-template matStepLabel>User Info</ng-template>
+                <mat-form-field class="my-width my-btn" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="Email" formControlName="email" required>
+                    <mat-error *ngIf="firstFormGroup.controls.email.errors?.['required']">Required</mat-error>
+                    <mat-error *ngIf="firstFormGroup.controls.email.errors?.['email']">Invalid Email</mat-error>
+                </mat-form-field>
                 <mat-form-field class="my-width" appearance="outline">
                     <mat-label>First Name</mat-label>
                     <input matInput placeholder="First name" formControlName="firstName" required>
                     <mat-error *ngIf="firstFormGroup.controls.firstName.errors?.['required']">Required</mat-error>
                 </mat-form-field>
-                <br>
-                <mat-form-field class="my-width" appearance="outline">
+                <mat-form-field class="my-width my-btn" appearance="outline">
                     <mat-label>Last Name</mat-label>
                     <input class="my-width" matInput placeholder="Last name" formControlName="lastName" required>
                     <mat-error *ngIf="firstFormGroup.controls.lastName.errors?.['required']">Required</mat-error>
                 </mat-form-field>
-                <br>
                 <mat-form-field class="my-width" appearance="outline">
                     <mat-label>Age</mat-label>
                     <input type="number" matInput placeholder="Age" formControlName="age">
                     <mat-error *ngIf="firstFormGroup.controls.age.errors?.['min']">Age must be greater than 18
                     </mat-error>
                     <mat-error *ngIf="firstFormGroup.controls.age.errors?.['max']">Age must be less than 100</mat-error>
-
                 </mat-form-field>
-                <br>
-                <mat-form-field class="my-width" appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input type="email" matInput placeholder="Email" formControlName="email" required>
-                    <mat-error *ngIf="firstFormGroup.controls.email.errors?.['required']">Required</mat-error>
-                    <mat-error *ngIf="firstFormGroup.controls.email.errors?.['email']">Invalid Email</mat-error>
-                </mat-form-field>
-                <br>
-                <mat-form-field class="my-width" appearance="outline">
+                <mat-form-field class="my-width my-btn" appearance="outline">
                     <mat-label>Password</mat-label>
                     <input type="password" matInput placeholder="Password" formControlName="password" required>
                     <mat-error *ngIf="firstFormGroup.controls.password.errors?.['required']">Required</mat-error>
                 </mat-form-field>
-                <br>
                 <mat-form-field class="my-width" appearance="outline">
                     <mat-label>Confirm Password</mat-label>
                     <input compare="password" type="password" matInput placeholder="Confirm Password" formControlName="confirmPassword"
