@@ -90,7 +90,7 @@
                     <mat-error *ngIf="secondFormGroup.controls.zipCode.errors?.['required']">Required</mat-error>
                 </mat-form-field>
                 <div>
-                    <button class="my-btn" mat-raised-button matStepperPrevious>Back</button>
+                    <button class="my-btn" mat-stroked-button matStepperPrevious>Back</button>
                     <button color="primary" mat-raised-button matStepperNext>Next</button>
                 </div>
             </form>
@@ -130,7 +130,7 @@
                     <mat-error *ngIf="thirdFormGroup.controls.expiryDate.errors?.['required']">Required</mat-error>
                   </mat-form-field>
                 <div>
-                    <button class="my-btn" mat-raised-button matStepperPrevious>Back</button>
+                    <button class="my-btn" mat-stroked-button matStepperPrevious>Back</button>
                     <button color="primary" mat-raised-button matStepperNext>Next</button>
                 </div>
             </form>
@@ -183,7 +183,7 @@
                 </mat-expansion-panel>
             </mat-accordion>
             <div style="padding-top: 30px;">
-                <button mat-raised-button matStepperPrevious class="my-btn">Back</button>
+                <button mat-stroked-button matStepperPrevious class="my-btn">Back</button>
                 <button mat-raised-button color="warn" (click)="stepper.reset()" class="my-btn">Reset</button>
                 <button (click)="submitForm()" type="submit" mat-raised-button color="primary">Submit</button>
             </div>

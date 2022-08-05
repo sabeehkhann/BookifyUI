@@ -14,11 +14,23 @@ export class AuthorService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllAuthors(){
+  getAll(){
     return this.httpClient.get(this.url + 'GetAll').pipe(map(res=> res));
   }
 
-  getAuthrById(id: string){
+  getById(id: string){
     return this.httpClient.get(this.url + 'Get/' + id, { 'headers': headers }).pipe(map(res => res));
+  }
+
+  createAuthor(resource: any){
+    return this.httpClient.post(this.url + 'Post/', resource, { 'headers': headers }).pipe(map(res => res));
+  }
+
+  updateAuthor(resource: any){
+    return this.httpClient.put(this.url + 'Put/', resource, { 'headers': headers }).pipe(map(res => res));
+  }
+  
+  deleteAuthor(id: string){
+    return this.httpClient.delete(this.url + 'DeleteById/' + id, { 'headers': headers }).pipe(map(res => res))
   }
 }

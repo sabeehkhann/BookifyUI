@@ -14,9 +14,6 @@ export interface BookshopsData {
   address: string;
 }
 
-
-
-
 @Component({
   selector: 'app-book-shops',
   templateUrl: './book-shops.component.html',

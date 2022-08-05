@@ -16,7 +16,7 @@ export class DialogDataExampleDialog {
 export class DeleteBookDialogComponent implements OnInit {
 
   book: any;
-  constructor(public dialogRef: MatDialogRef<DeleteBookDialogComponent>,private router: Router, private _snackBar: MatSnackBar,  private bookService: BookService, @Inject(MAT_DIALOG_DATA) data: any) {
+  constructor(public dialogRef: MatDialogRef<DeleteBookDialogComponent>, private _snackBar: MatSnackBar,  private bookService: BookService, @Inject(MAT_DIALOG_DATA) data: any) {
     this.book = data;
    }
 

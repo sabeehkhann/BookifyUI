@@ -50,6 +50,8 @@ import { BookshopViewComponent } from './components/bookshop-view/bookshop-view.
 import { DeleteBookDialogComponent } from './components/delete-book-dialog/delete-book-dialog.component';
 import { DeleteBookshopDialogComponent } from './components/delete-bookshop-dialog/delete-bookshop-dialog.component';
 import { AddStockDialogComponent } from './components/add-stock-dialog/add-stock-dialog.component';
+import { AuthorViewComponent } from './components/author-view/author-view.component';
+import { DeleteAuthorDialogComponent } from './components/delete-author-dialog/delete-author-dialog.component';
 
 
 @NgModule({
@@ -72,6 +74,8 @@ import { AddStockDialogComponent } from './components/add-stock-dialog/add-stock
     DeleteBookDialogComponent,
     DeleteBookshopDialogComponent,
     AddStockDialogComponent,
+    AuthorViewComponent,
+    DeleteAuthorDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -118,6 +122,7 @@ import { AddStockDialogComponent } from './components/add-stock-dialog/add-stock
         { path: 'bookshops', component: BookShopsComponent, canActivate: [AuthGuardService]},
         { path: 'authors', component: AuthorsComponent, canActivate: [AuthGuardService]},
         { path: 'createauthor', component: CreateAuthorComponent, canActivate: [AuthGuardService]},
+        { path: 'createauthor/:id', component: CreateAuthorComponent, canActivate: [AuthGuardService]},
         { path: 'bookview', component: BookViewComponent, canActivate: [AuthGuardService]},
         { path: 'thankyou', component: ThankyouPageComponent,},
         { path: 'welcome', component: WelcomePageComponent},

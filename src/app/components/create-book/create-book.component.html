@@ -39,6 +39,6 @@
     <mat-error *ngIf="desc.invalid">Required</mat-error>
   </mat-form-field>
   <br>
-  <button class="btn-space" [routerLink]="['/books']" mat-button>Cancel</button>
+  <button mat-stroked-button class="btn-space" [routerLink]="['/books']" mat-button>Cancel</button>
   <button [disabled]="addbookform.invalid" type="submit" mat-raised-button color="primary">{{ pageTitle }}</button>
 </form>

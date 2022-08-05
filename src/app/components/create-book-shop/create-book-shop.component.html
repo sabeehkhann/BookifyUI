@@ -12,6 +12,6 @@
         <mat-error *ngIf="address.invalid">Required</mat-error>
     </mat-form-field>
     <br>
-    <button class="btn-space" [routerLink]="['/bookshops']" mat-button>Cancel</button>
+    <button mat-stroked-button class="btn-space" [routerLink]="['/bookshops']" mat-button>Cancel</button>
     <button [disabled]="addbookshopform.invalid" type="submit" mat-raised-button color="primary">{{ pageTitle}}</button>
 </form>

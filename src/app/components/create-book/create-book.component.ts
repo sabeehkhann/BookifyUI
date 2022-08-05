@@ -6,6 +6,8 @@ import { CategoryService } from 'src/app/services/category/category.service';
 import { AuthorService } from 'src/app/services/author/author.service';
 import { BookCategoryService } from 'src/app/services/book-category/book-category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { forkJoin } from 'rxjs';
+
 
 @Component({
   selector: 'app-create-book',
@@ -33,20 +35,16 @@ export class CreateBookComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar, private router: Router, private bookService: BookService, private route: ActivatedRoute,private catService: CategoryService, private bookCatService: BookCategoryService, private authorService: AuthorService) { }
 
   ngOnInit(): void {
-    this.catService.getAllCategories()
-    .subscribe({
-      next: res => {
-        this.categories = res;
-      }
-    })
 
-  this.authorService.getAllAuthors()
-    .subscribe({
-      next: res => {
-        this.authors = res;
-      }
+    forkJoin({
+      requestOne: this.catService.getAllCategories(),
+      requestTwo: this.authorService.getAll(),
     })
-
+      .subscribe(({ requestOne, requestTwo }) => {
+        this.categories = requestOne;
+        this.authors = requestTwo;
+      });
+      
     this.route.paramMap.subscribe({
       next: (params) => {
         var id = params.get('id');

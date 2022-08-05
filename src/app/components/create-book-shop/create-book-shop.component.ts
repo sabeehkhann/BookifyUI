@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Bookshop } from 'src/app/models/Bookshop';
@@ -21,10 +20,9 @@ export class CreateBookShopComponent implements OnInit {
 
   pageTitle: string = '';
 
-  constructor(private _snackBar: MatSnackBar, private router: Router, private bookshopService: BookshopService, private route: ActivatedRoute, private _formBuilder: FormBuilder) { }
+  constructor(private _snackBar: MatSnackBar, private router: Router, private bookshopService: BookshopService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-
     this.route.paramMap.subscribe({
       next: (params) => {
         var id = params.get('id');
@@ -57,8 +55,9 @@ export class CreateBookShopComponent implements OnInit {
         .subscribe({
           next: (res: any) => {
             // this.userId = <number>res.id;
-            
-            
+            this._snackBar.open('Bookshop Added', 'Done', {
+              duration: 3000
+            })
             this.router.navigate(['/bookshops'])
           },
         })

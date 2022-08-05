@@ -75,7 +75,7 @@ export class BooksComponent implements OnInit {
           }
         },
         complete: () => {
-          this.authorService.getAuthrById(book.authorId)
+          this.authorService.getById(book.authorId)
             .subscribe({
               next: (res: any) => {
                 res.authorName = res.name;
