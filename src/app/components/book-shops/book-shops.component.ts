@@ -3,6 +3,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { forkJoin } from 'rxjs';
+import { BookBookshopService } from 'src/app/services/book-bookshop/book-bookshop.service';
 import { BookshopService } from 'src/app/services/bookshop/bookshop.service';
 import { AddStockDialogComponent } from '../add-stock-dialog/add-stock-dialog.component';
 import { BookshopViewComponent } from '../bookshop-view/bookshop-view.component';
@@ -27,11 +29,12 @@ export class BookShopsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator?: MatPaginator | any;
   @ViewChild(MatSort) sort?: MatSort | any;
 
-  constructor(private dialog: MatDialog, private bookshopService: BookshopService) {
+  constructor(private bookBookshopService: BookBookshopService, private dialog: MatDialog, private bookshopService: BookshopService) {
   }
 
   ngOnInit(): void {
-    this.bookshopService.getAll()
+    let user: any = JSON.parse(localStorage.getItem('User')!);
+    this.bookshopService.getAll(user.id)
       .subscribe((res: any) => {
         res.forEach((element: any) => {
           let bookshop: BookshopsData = {
@@ -58,19 +61,22 @@ export class BookShopsComponent implements OnInit {
 
   openViewDialog(id: string) {
     let bookshop: any;
+    let books: any;
+    forkJoin({
+      bookshopRes: this.bookshopService.getById(id),
+      booksRes: this.bookBookshopService.getAllBookshopDetail(id)
+    })
+    .subscribe(({ bookshopRes, booksRes }) => {
+      bookshop = bookshopRes;
+      books = booksRes;
+      
+      bookshop.books = books;
 
-    this.bookshopService.getById(id)
-      .subscribe({
-        next: (res: any) => {
-          bookshop = res;
-        },
-        complete: () => {
-          const dialogConfig = new MatDialogConfig();
-          dialogConfig.data = bookshop;
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.data = bookshop;
 
-          this.dialog.open(BookshopViewComponent, dialogConfig);
-        }
-      })
+      this.dialog.open(BookshopViewComponent, dialogConfig);
+    });
   }
 
   openDeleteDialog(id: any) {
@@ -106,7 +112,7 @@ export class BookShopsComponent implements OnInit {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.data = bookshop;
 
-        let dialogRef = this.dialog.open(AddStockDialogComponent, dialogConfig);
+        this.dialog.open(AddStockDialogComponent, dialogConfig);
       }
     })
   }
