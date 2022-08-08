@@ -21,6 +21,12 @@ export class LoginComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    let user = localStorage.getItem('User');
+
+    if(user == null){
+      
+    }
+
   }
 
   Submit(){

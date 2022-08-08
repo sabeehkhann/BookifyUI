@@ -1,12 +1,11 @@
     
     
-<h2 mat-dialog-title>{{ bookshop.name }}</h2>
+<h2 class="color" mat-dialog-title>{{ bookshop.name }}</h2>
 <mat-divider></mat-divider>
 <mat-dialog-content class="mat-typography width">
-  <h2 style="padding-top: 10px;">Address</h2>
-  <p>{{ bookshop.address }}</p>
+  <p style="padding-top: 10px;"><b class="color">Address: </b>{{ bookshop.address }}</p>
   
-  <h2>Books</h2>
+  <h2 class="color">Available Books:</h2>
   <p *ngFor="let book of bookshop.books">{{ book.book.name }} x {{ book.stock }}</p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

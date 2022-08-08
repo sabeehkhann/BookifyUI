@@ -9,7 +9,7 @@
   <mat-form-field class="my-width" appearance="outline">
     <mat-label>Author</mat-label>
     <mat-select #authorId="ngModel" name="authorId" [(ngModel)]="book.authorId" required>
-      <mat-option [value]="0">Select</mat-option>
+      <mat-option [value]="">Select</mat-option>
       <mat-option *ngFor="let author of authors" [value]="author.id" [value]="author.id">{{ author.name }}</mat-option>
     </mat-select>
     <mat-error *ngIf="authorId.invalid">Required</mat-error>
@@ -35,7 +35,7 @@
   <br>
   <mat-form-field class="my-width" appearance="outline">
     <mat-label>Description</mat-label>
-    <textarea #desc="ngModel" name="description" placeholder="Short description" matInput [(ngModel)]="book.description" required></textarea>
+    <textarea rows="5" #desc="ngModel" name="description" placeholder="Short description" matInput [(ngModel)]="book.description" required></textarea>
     <mat-error *ngIf="desc.invalid">Required</mat-error>
   </mat-form-field>
   <br>

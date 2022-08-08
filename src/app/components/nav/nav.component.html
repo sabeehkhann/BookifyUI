@@ -5,10 +5,13 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar *ngIf="service?.isLoggedIn() == true">Menu</mat-toolbar>
     <mat-nav-list>
-      <a *ngIf="service?.isLoggedIn() == true" routerLink="/books" mat-list-item href="#">Books</a>
-      <a *ngIf="service?.isLoggedIn() == true" routerLink="/bookshops" mat-list-item href="#">Bookshops</a>
-      <a *ngIf="service?.isLoggedIn() == true" routerLink="/authors" mat-list-item href="#">Authors</a>
-      <a *ngIf="service?.isLoggedIn() == true" routerLink="/categories" mat-list-item href="#">Categories</a>
+      <a *ngIf="service?.isLoggedIn() == true" routerLink="/books" mat-list-item href="#" class="color">Books</a>
+      <mat-divider *ngIf="service?.isLoggedIn() == true"></mat-divider>
+      <a *ngIf="service?.isLoggedIn() == true" routerLink="/bookshops" mat-list-item href="#" class="color">Bookshops</a>
+      <mat-divider *ngIf="service?.isLoggedIn() == true"></mat-divider>
+      <a *ngIf="service?.isLoggedIn() == true" routerLink="/authors" mat-list-item href="#" class="color">Authors</a>
+      <mat-divider *ngIf="service?.isLoggedIn() == true"></mat-divider>
+      <a *ngIf="service?.isLoggedIn() == true" routerLink="/categories" mat-list-item href="#" class="color">Categories</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

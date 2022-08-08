@@ -51,6 +51,7 @@ import { DeleteBookshopDialogComponent } from './components/delete-bookshop-dial
 import { AddStockDialogComponent } from './components/add-stock-dialog/add-stock-dialog.component';
 import { AuthorViewComponent } from './components/author-view/author-view.component';
 import { DeleteAuthorDialogComponent } from './components/delete-author-dialog/delete-author-dialog.component';
+import { AlreadyLoggedInComponent } from './components/already-logged-in/already-logged-in.component';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { DeleteAuthorDialogComponent } from './components/delete-author-dialog/d
     AddStockDialogComponent,
     AuthorViewComponent,
     DeleteAuthorDialogComponent,
+    AlreadyLoggedInComponent,
   ],
   imports: [
     BrowserModule,
@@ -126,6 +128,8 @@ import { DeleteAuthorDialogComponent } from './components/delete-author-dialog/d
           { path: 'bookview', component: BookViewComponent, canActivate: [AuthGuardService] },
           { path: 'thankyou', component: ThankyouPageComponent, },
           { path: 'welcome', component: WelcomePageComponent },
+          { path: 'alreadyloggedin', component: AlreadyLoggedInComponent, canActivate: [AuthGuardService]},
+
         ]
       },
       { path: '**', component: NavComponent }
