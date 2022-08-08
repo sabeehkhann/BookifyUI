@@ -23,8 +23,10 @@ export class AddStockDialogComponent implements OnInit {
   bookshop: any;
   BooksSelectList: any;
   bookshopData: any;
+  bookshopTitle: any;
   constructor(private bookBookshopService: BookBookshopService, private bookService: BookService, public dialogRef: MatDialogRef<AddStockDialogComponent>, private _snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) data: any) {
-    this.bookshop = data
+    this.bookshop = data;
+    this.bookshopTitle = data.name;
   }
 
   ngOnInit(): void {
