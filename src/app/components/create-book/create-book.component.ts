@@ -32,7 +32,7 @@ export class CreateBookComponent implements OnInit {
   authors: any;
   userId?: number;
 
-  constructor(private _snackBar: MatSnackBar, private router: Router, private bookService: BookService, private route: ActivatedRoute,private catService: CategoryService, private bookCatService: BookCategoryService, private authorService: AuthorService) { }
+  constructor(private _snackBar: MatSnackBar, private router: Router, private bookService: BookService, private route: ActivatedRoute, private catService: CategoryService, private bookCatService: BookCategoryService, private authorService: AuthorService) { }
 
   ngOnInit(): void {
     let user: any = JSON.parse(localStorage.getItem('User')!);
@@ -45,11 +45,11 @@ export class CreateBookComponent implements OnInit {
         this.categories = requestOne;
         this.authors = requestTwo;
       });
-      
+
     this.route.paramMap.subscribe({
       next: (params) => {
         var id = params.get('id');
-        if(id){
+        if (id) {
           this.bookService.getBookById(id)
             .subscribe({
               next: (res: any) => {
@@ -57,18 +57,17 @@ export class CreateBookComponent implements OnInit {
               },
               complete: () => {
                 this.pageTitle = 'Edit ';
+                this.bookCatService.getCategoriesByBookId(id)
+                  .subscribe((res: any) => {
+                    res.forEach((ele: any) => {
+                      this.book.category = this.book.category || [];
+                      this.book.category?.push(ele.categoryId);
+                    })
+                  })
               }
             })
-
-            this.bookCatService.getCategoriesByBookId(id)
-            .subscribe((res: any) => {
-              res.forEach((ele: any) => {
-                this.book.category = this.book.category || [];
-                this.book.category?.push(ele.categoryId);
-              })
-            })
         }
-        else{
+        else {
           this.pageTitle = 'Create ';
         }
       }
@@ -107,6 +106,6 @@ export class CreateBookComponent implements OnInit {
     }
   }
 
-  
+
 }
 

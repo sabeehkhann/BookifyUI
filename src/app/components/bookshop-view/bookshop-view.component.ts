@@ -9,11 +9,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class BookshopViewComponent implements OnInit {
 
   bookshop: any;
-  constructor(private dialogRef: MatDialogRef<BookshopViewComponent>, @Inject(MAT_DIALOG_DATA) data: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: any) {
     this.bookshop = data;
    }
 
   ngOnInit(): void {
   }
 
+  checkBooks(){ 
+    if(this.bookshop.books.length > 0){
+      return true;
+    }
+    return false;
+  }
 }

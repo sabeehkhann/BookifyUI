@@ -24,7 +24,7 @@ export interface BookshopsData {
 export class BookShopsComponent implements OnInit {
   allBookshops: BookshopsData[] = [];
   displayedColumns: string[] = ['name', 'address', 'actions'];
-  dataSource: MatTableDataSource<BookshopsData> | any;
+  dataSource: MatTableDataSource<BookshopsData> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator?: MatPaginator | any;
   @ViewChild(MatSort) sort?: MatSort | any;
@@ -44,7 +44,7 @@ export class BookShopsComponent implements OnInit {
           };
           this.allBookshops?.push(bookshop);
         });
-        this.dataSource = new MatTableDataSource(this.allBookshops);
+        this.dataSource.data = this.allBookshops;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
@@ -118,8 +118,7 @@ export class BookShopsComponent implements OnInit {
   }
 
   deleteRowData(id: any){
-    this.dataSource = this.dataSource.data.filter((value: any) =>{
-      
+    this.dataSource.data = this.dataSource.data.filter((value: BookshopsData) =>{
       return value.id != id;
     });
   }

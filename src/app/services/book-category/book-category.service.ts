@@ -19,7 +19,7 @@ export class BookCategoryService {
     return this.httpClient.post(this.url + 'Post/', resource, { 'headers': headers }).pipe(map(res => res));
   }
 
-  getCategoriesByBookId(bookId: string){
+  getCategoriesByBookId(bookId: string | null){
     return this.httpClient.get(this.url + 'GetCategoriesByBookId/' + bookId, { 'headers': headers }).pipe(map(res => res));
   }
 

@@ -5,8 +5,11 @@
 <mat-dialog-content class="mat-typography width">
   <p style="padding-top: 10px;"><b class="color">Address: </b>{{ bookshop.address }}</p>
   
-  <h2 class="color">Available Books:</h2>
-  <p *ngFor="let book of bookshop.books">{{ book.book.name }} x {{ book.stock }}</p>
+  <div *ngIf="checkBooks()">
+    <h2  class="color">Available Books:</h2>
+    <p class="color"><b>Book</b><span style="float:right;"><b>Stock#</b></span></p>
+    <p *ngFor="let book of bookshop.books">{{ book.book.name }}<span style="float:right;">{{ book.stock }}</span><mat-divider></mat-divider></p>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button color="primary" mat-raised-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>

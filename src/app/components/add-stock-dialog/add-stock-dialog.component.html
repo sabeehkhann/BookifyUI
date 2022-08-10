@@ -1,22 +1,24 @@
 <h2 class="color" mat-dialog-title>{{ this.bookshopTitle }}</h2>
 <mat-divider></mat-divider>
-<h2 style="padding-top: 10px;" class="color" mat-dialog-title>Update Stock</h2>
-<mat-divider></mat-divider>
+<div *ngIf="checkStock()">
+  <h3 style="padding-top: 10px;" class="color" mat-dialog-title>Update Stock</h3>
+  <mat-divider></mat-divider>
+</div>
 <mat-dialog-content style="padding-top: 10px;" class="mat-typography width">
   <div *ngFor="let book of bookshopData">
     <mat-form-field style="padding-right: 10px; width: 300px;" appearance="outline">
-      <!-- <mat-label>Enter some input</mat-label> -->
+      <mat-label>Book Name</mat-label>
       <input matInput [value]="book.book.name" disabled placeholder="" type="text">
     </mat-form-field>
     <mat-form-field style="padding-right: 10px; width: 100px;" appearance="outline">
-      <!-- <mat-label>Enter some input</mat-label> -->
+      <mat-label>Stock</mat-label>
       <input min="0" #stockEdit name="stockEdit" [value]="book.stock" matInput placeholder="" type="number" required>
     </mat-form-field>
     <button (click)="editStock(book.bookId, stockEdit.value)" color="primary" mat-raised-button>Edit</button>
   </div>
-  <h2 class="color" mat-dialog-title>Add Book</h2>
+  <h3 class="color" mat-dialog-title>Add Book</h3>
   <mat-divider></mat-divider>
-  <form #addBookForm="ngForm" (ngSubmit)="addBook(addBookForm, booklist.value)">
+  <form style="padding-top: 10px;" #addBookForm="ngForm" (ngSubmit)="addBook(addBookForm, booklist.value)">
     <mat-form-field style="padding-right: 10px; width: 300px;" appearance="outline">
       <mat-label>Select Book</mat-label>
       <mat-select name="booklist" #booklist="ngModel" [(ngModel)]="selectListValue" placeholder="Select Book" required>
@@ -26,14 +28,14 @@
       <mat-error *ngIf="booklist.invalid">Required</mat-error>
     </mat-form-field>
     <mat-form-field style="padding-right: 10px; width: 100px;" appearance="outline">
-      <!-- <mat-label>Enter some input</mat-label> -->
-      <input min="0" matInput name="stock" #stock="ngModel" [(ngModel)]="stockValue" id="stock" placeholder="Number" type="number" required>
+      <mat-label>Stock</mat-label>
+      <input min="0" matInput name="stock" #stock="ngModel" [(ngModel)]="stockValue" id="stock" placeholder="Stock" type="number" required>
       <mat-error *ngIf="stock.invalid">Required</mat-error>
     </mat-form-field>
     <button [disabled]="stock.invalid || booklist.invalid" color="primary"
       mat-raised-button type="submit">Add</button>
   </form>
-  
+
 </mat-dialog-content>
 <mat-divider></mat-divider>
 <mat-dialog-actions align="end">

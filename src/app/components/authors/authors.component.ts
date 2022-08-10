@@ -22,7 +22,7 @@ export interface AuthorsData {
 export class AuthorsComponent implements OnInit {
   allAuthors: AuthorsData[] = [];
   displayedColumns: string[] = ['name', 'actions'];
-  dataSource: MatTableDataSource<AuthorsData> | any;
+  dataSource: MatTableDataSource<AuthorsData> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator?: MatPaginator | any;
   @ViewChild(MatSort) sort?: MatSort | any;
@@ -41,7 +41,7 @@ export class AuthorsComponent implements OnInit {
           };
           this.allAuthors?.push(author);
         });
-        this.dataSource = new MatTableDataSource(this.allAuthors);
+        this.dataSource.data = this.allAuthors;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
@@ -94,7 +94,8 @@ export class AuthorsComponent implements OnInit {
       .subscribe({
         next: (res: any) => {
           author = res;
-
+        },
+        complete: () => {
           const dialogConfig = new MatDialogConfig();
           dialogConfig.data = author;
 
@@ -105,16 +106,12 @@ export class AuthorsComponent implements OnInit {
               this.deleteRowData(author.id);
             }
           });
-        },
-        complete: () => {
-          
         }
       })
   }
 
   deleteRowData(id: any){
-    this.dataSource = this.dataSource.data.filter((value: any) =>{
-      console.log(id, value.id);
+    this.dataSource.data = this.dataSource.data.filter((value: AuthorsData) =>{
       return value.id != id;
     });
   }

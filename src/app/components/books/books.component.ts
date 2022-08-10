@@ -10,7 +10,7 @@ import { BookViewComponent } from '../book-view/book-view.component';
 import { DeleteBookDialogComponent } from '../delete-book-dialog/delete-book-dialog.component';
 
 
-export interface BooksData {
+export interface BookData {
   id: number;
   name: string;
   isbn: string;
@@ -24,9 +24,9 @@ export interface BooksData {
 })
 
 export class BooksComponent implements OnInit {
-  allBooks: BooksData[] = [];
+  allBooks: BookData[] = [];
   displayedColumns: string[] = ['name', 'isbn', 'isActive', 'actions'];
-  dataSource?: MatTableDataSource<BooksData> | any;
+  dataSource: MatTableDataSource<BookData> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator?: MatPaginator | any;
   @ViewChild(MatSort) sort?: MatSort | any;
@@ -40,7 +40,7 @@ export class BooksComponent implements OnInit {
     this.bookService.getAllForUser(user.id)
       .subscribe((res: any) => {
         res.forEach((element: any) => {
-          let book: BooksData = {
+          let book: BookData = {
             id: element.id,
             name: element.name,
             isbn: element.isbn,
@@ -49,7 +49,7 @@ export class BooksComponent implements OnInit {
           this.allBooks?.push(book);
         });
 
-        this.dataSource = new MatTableDataSource(this.allBooks);
+        this.dataSource.data = this.allBooks;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
@@ -128,8 +128,7 @@ export class BooksComponent implements OnInit {
   }
 
   deleteRowData(id: any){
-    this.dataSource = this.dataSource.data.filter((value: any) =>{
-      
+    this.dataSource.data = this.dataSource.data.filter((value: BookData) =>{
       return value.id != id;
     });
   }
