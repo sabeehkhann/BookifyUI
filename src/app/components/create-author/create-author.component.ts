@@ -53,7 +53,7 @@ export class CreateAuthorComponent implements OnInit {
       this.authorService.createAuthor(this.author)
         .subscribe({
           next: (res: any) => {
-            this._snackBar.open('Author Updated', 'Done', {
+            this._snackBar.open('Author Added', 'Done', {
               duration: 3000
             })
             this.router.navigate(['/authors'])

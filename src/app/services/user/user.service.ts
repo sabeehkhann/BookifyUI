@@ -12,7 +12,7 @@ const headers= new HttpHeaders()
 
 export class UserService {
 
-  private userUrl = 'https://localhost:44353/api/User/'
+  private userUrl = 'http://localhost:8080/api/User/'
 
   constructor(private HttpClient: HttpClient) { 
 

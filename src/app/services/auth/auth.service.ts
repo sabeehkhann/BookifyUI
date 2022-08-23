@@ -10,7 +10,7 @@ const headers= new HttpHeaders()
   providedIn: 'root'
 })
 export class AuthService {
-  private userUrl = 'https://localhost:44353/api/User/'
+  private userUrl = 'http://localhost:8080/api/User/'
 
   username?: string;
 

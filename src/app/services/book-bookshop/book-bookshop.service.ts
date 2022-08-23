@@ -11,7 +11,7 @@ const headers= new HttpHeaders()
   providedIn: 'root'
 })
 export class BookBookshopService {
-  private url = 'https://localhost:44353/api/BookBookshop/'
+  private url = 'http://localhost:8080/api/BookBookshop/'
   constructor(private httpClient: HttpClient) { }
 
   getAll(id: string){

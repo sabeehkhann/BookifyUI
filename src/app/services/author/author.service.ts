@@ -10,7 +10,7 @@ const headers= new HttpHeaders()
   providedIn: 'root'
 })
 export class AuthorService {
-  private url = 'https://localhost:44353/api/Author/'
+  private url = 'http://localhost:8080/api/Author/'
 
   constructor(private httpClient: HttpClient) { }
 

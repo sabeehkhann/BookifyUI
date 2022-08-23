@@ -10,7 +10,7 @@ const headers= new HttpHeaders()
   providedIn: 'root'
 })
 export class CategoryService {
-  private url = 'https://localhost:44353/api/Category/'
+  private url = 'http://localhost:8080/api/Category/'
 
   constructor(private httpClient: HttpClient) { }
 

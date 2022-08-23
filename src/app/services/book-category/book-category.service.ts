@@ -11,7 +11,7 @@ const headers= new HttpHeaders()
   providedIn: 'root'
 })
 export class BookCategoryService {
-  private url = 'https://localhost:44353/api/BookCategory/'
+  private url = 'http://localhost:8080/api/BookCategory/'
 
   constructor(private httpClient: HttpClient) { }
 
